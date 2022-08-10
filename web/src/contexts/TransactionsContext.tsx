@@ -10,9 +10,17 @@ interface ITransactions {
   createdAt: Date
 }
 
+interface ICreateTransactionsInput {
+  description: string
+  price: number
+  category: string
+  type: 'income' | 'outcome'
+}
+
 interface ITransactionsContext {
   transactions: ITransactions[]
   fetchTransaction: (query?: string) => Promise<void>
+  createTransaction: (data: ICreateTransactionsInput) => Promise<void>
 }
 
 interface TransactionsProviderProps {
@@ -27,6 +35,8 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
   async function fetchTransaction(query?: string) {
     const response = await api.get('/transactions', {
       params: {
+        _sort: 'createdAt',
+        _order: 'desc',
         q: query,
       },
     })
@@ -34,12 +44,28 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
     setTransactions(response.data)
   }
 
+  async function createTransaction(data: ICreateTransactionsInput) {
+    const { description, price, category, type } = data
+
+    const response = await api.post('/transactions', {
+      description,
+      price,
+      category,
+      type,
+      createdAt: new Date(),
+    })
+
+    setTransactions((state) => [response.data, ...state])
+  }
+
   useEffect(() => {
     fetchTransaction()
   }, [])
 
   return (
-    <TransactionsContext.Provider value={{ transactions, fetchTransaction }}>
+    <TransactionsContext.Provider
+      value={{ transactions, fetchTransaction, createTransaction }}
+    >
       {children}
     </TransactionsContext.Provider>
   )
