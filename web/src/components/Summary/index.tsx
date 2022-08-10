@@ -1,7 +1,6 @@
 import { SummaryCard, SummaryContainer } from './styles'
 import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react'
 import { useTheme } from 'styled-components'
-import { useTransactions } from '../../hooks/useTransactions'
 import { priceFormatter } from '../../utils/formatter'
 import { useSummary } from '../../hooks/useSummary'
 
