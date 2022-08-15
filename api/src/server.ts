@@ -1,3 +1,4 @@
+import "dotenv/config"
 import express, { NextFunction, Request, Response } from 'express'
 import 'reflect-metadata'
 import 'express-async-errors'

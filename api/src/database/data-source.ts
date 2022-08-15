@@ -1,17 +1,12 @@
-import "dotenv/config"
-
 import { DataSource } from "typeorm"
 
-const port = process.env.DB_PORT as undefined
-const type = process.env.DB_TYPE as undefined
-
 export const AppDataSource = new DataSource({
-  type: type,
-  host: process.env.DB_HOST,
-  port: port,
-  username: process.env.DB_USER,
-  password:  process.env.DB_PASS,
-  database: process.env.DB_NAME,
+  type: "postgres",
+  host: "localhost",
+  port: 5432,
+  username: "docker",
+  password: "9121",
+  database: "my-finances-api",
   synchronize: false,
   logging: false,
   entities: ["src/modules/**/entities/*.ts"],
