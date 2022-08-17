@@ -9,8 +9,9 @@ export class CreateTransactionController {
       type,
       category,
       price,
-      user,
     } = request.body
+
+    const { id } = request.user
 
     const createTransactionUseCase = container.resolve(CreateTransactionUseCase)
 
@@ -19,7 +20,7 @@ export class CreateTransactionController {
       type,
       category,
       price,
-      user,
+      user: { id }
     })
 
     return response.status(201).json({ message: "Transaction created successfully." })

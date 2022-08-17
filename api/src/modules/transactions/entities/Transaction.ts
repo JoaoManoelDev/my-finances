@@ -20,7 +20,7 @@ export class Transaction {
   @Column()
   price: number
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, user => user.transaction)
   @JoinColumn({ name: "user_id" })
   user: User
 
