@@ -1,5 +1,7 @@
 import "dotenv/config"
 import express, { NextFunction, Request, Response } from 'express'
+import cors from 'cors'
+import helmet from "helmet"
 import 'reflect-metadata'
 import 'express-async-errors'
 import './shared/container'
@@ -10,6 +12,14 @@ import { router } from './shared/routes'
 createConnection()
 
 const app = express()
+
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
+app.use(helmet())
 
 app.use(express.json())
 
