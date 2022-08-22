@@ -8,7 +8,7 @@ interface IfetchSignUp {
   name: string
 }
 
-interface IUsersContext {
+interface IAuthContext {
   fetchSignUp: ({
     email,
     name,
@@ -17,20 +17,20 @@ interface IUsersContext {
   }: IfetchSignUp) => Promise<void>
 }
 
-interface UsersProviderProps {
+interface AuthProviderProps {
   children: ReactNode
 }
 
-export const UsersContext = createContext({} as IUsersContext)
+export const AuthContext = createContext({} as IAuthContext)
 
-export function UsersProvider({ children }: UsersProviderProps) {
+export function AuthProvider({ children }: AuthProviderProps) {
   async function fetchSignUp({
     email,
     password,
     passwordConfirm,
     name,
   }: IfetchSignUp) {
-    const response = await api.post('/users', {
+    const response = await api.post('users/signup', {
       email,
       password,
       passwordConfirm,
@@ -41,8 +41,8 @@ export function UsersProvider({ children }: UsersProviderProps) {
   }
 
   return (
-    <UsersContext.Provider value={{ fetchSignUp }}>
+    <AuthContext.Provider value={{ fetchSignUp }}>
       {children}
-    </UsersContext.Provider>
+    </AuthContext.Provider>
   )
 }

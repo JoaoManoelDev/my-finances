@@ -4,18 +4,18 @@ import { ThemeProvider } from 'styled-components'
 import { TransactionsProvider } from './contexts/TransactionsContext'
 import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
-import { UsersProvider } from './contexts/UsersContext'
+import { AuthProvider } from './contexts/Auth'
 
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <UsersProvider>
+      <AuthProvider>
         <TransactionsProvider>
           <BrowserRouter>
             <Router />
           </BrowserRouter>
         </TransactionsProvider>
-      </UsersProvider>
+      </AuthProvider>
       <GlobalStyle />
     </ThemeProvider>
   )

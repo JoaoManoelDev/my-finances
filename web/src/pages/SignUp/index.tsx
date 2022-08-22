@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { SignIn } from 'phosphor-react'
-import { UsersContext } from '../../contexts/UsersContext'
+import { AuthContext } from '../../contexts/Auth'
 
 const searchFormSchema = z.object({
   email: z.string(),
@@ -17,20 +17,20 @@ const searchFormSchema = z.object({
 type SearchFormInputs = z.infer<typeof searchFormSchema>
 
 export function SignUp() {
-  const { fetchSignUp } = useContext(UsersContext)
+  const { fetchSignUp } = useContext(AuthContext)
 
   const { register, handleSubmit } = useForm<SearchFormInputs>({
     resolver: zodResolver(searchFormSchema),
   })
 
-  async function handleSearchTransactions(data: SearchFormInputs) {
+  async function handleSignUpUser(data: SearchFormInputs) {
     const { email, password, passwordConfirm, name } = data
     await fetchSignUp({ email, password, passwordConfirm, name })
   }
 
   return (
     <SignUpContainer>
-      <SignUpFormContainer onSubmit={handleSubmit(handleSearchTransactions)}>
+      <SignUpFormContainer onSubmit={handleSubmit(handleSignUpUser)}>
         <h1>Inscreva-se</h1>
 
         <input type="text" placeholder="Nome" {...register('name')} />
