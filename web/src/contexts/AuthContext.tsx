@@ -8,6 +8,11 @@ interface IfetchSignUp {
   name: string
 }
 
+interface IfetchSignIn {
+  email: string
+  password: string
+}
+
 interface IAuthContext {
   fetchSignUp: ({
     email,
@@ -15,6 +20,8 @@ interface IAuthContext {
     password,
     passwordConfirm,
   }: IfetchSignUp) => Promise<void>
+
+  fetchSignIn: ({ email, password }: IfetchSignIn) => Promise<void>
 }
 
 interface AuthProviderProps {
@@ -40,8 +47,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     console.log(response)
   }
 
+  async function fetchSignIn({ email, password }: IfetchSignIn) {
+    console.log(email)
+
+    const { data } = await api.post('auth', {
+      email,
+      password,
+    })
+
+    console.log(data)
+  }
+
   return (
-    <AuthContext.Provider value={{ fetchSignUp }}>
+    <AuthContext.Provider value={{ fetchSignUp, fetchSignIn }}>
       {children}
     </AuthContext.Provider>
   )

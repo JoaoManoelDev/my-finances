@@ -5,32 +5,33 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { SignIn } from 'phosphor-react'
-import { AuthContext } from '../../contexts/Auth'
+import { AuthContext } from '../../contexts/AuthContext'
 
-const searchFormSchema = z.object({
+const signUpFormSchema = z.object({
   email: z.string(),
   password: z.string(),
   passwordConfirm: z.string(),
   name: z.string(),
 })
 
-type SearchFormInputs = z.infer<typeof searchFormSchema>
+type SignUpFormInputs = z.infer<typeof signUpFormSchema>
 
 export function SignUp() {
   const { fetchSignUp } = useContext(AuthContext)
 
-  const { register, handleSubmit } = useForm<SearchFormInputs>({
-    resolver: zodResolver(searchFormSchema),
+  const { register, handleSubmit, reset } = useForm<SignUpFormInputs>({
+    resolver: zodResolver(signUpFormSchema),
   })
 
-  async function handleSignUpUser(data: SearchFormInputs) {
+  async function handleSignUpSubmit(data: SignUpFormInputs) {
     const { email, password, passwordConfirm, name } = data
     await fetchSignUp({ email, password, passwordConfirm, name })
+    reset()
   }
 
   return (
     <SignUpContainer>
-      <SignUpFormContainer onSubmit={handleSubmit(handleSignUpUser)}>
+      <SignUpFormContainer onSubmit={handleSubmit(handleSignUpSubmit)}>
         <h1>Inscreva-se</h1>
 
         <input type="text" placeholder="Nome" {...register('name')} />
@@ -54,7 +55,7 @@ export function SignUp() {
 
         <LinkSignIn>
           <span>Já possui um conta?</span>
-          <NavLink to="/">
+          <NavLink to="/signin">
             <SignIn size={14} />
             <span>Entrar</span>
           </NavLink>
