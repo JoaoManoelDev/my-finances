@@ -32,8 +32,14 @@ export class TransactionsRepository implements ITransactionsRepository {
     await this.repository.save(newTransaction)
   }
 
-  async findByUserId(user_id: string): Promise<Transaction[]> {
-    const transactions = await this.repository.find({ user: user_id } as FindManyOptions<Transaction>)
+  async findByUserId(user_id: string, _order: string): Promise<Transaction[]> {
+    console.log(user_id)
+
+    const transactions = await this.repository.find({
+      relations: {
+        user: user_id
+      }
+    } as FindManyOptions<Transaction>)
 
     return transactions
   }

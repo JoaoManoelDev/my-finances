@@ -5,10 +5,15 @@ export const SignInContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background: linear-gradient(
+    50deg,
+    ${(props) => props.theme.colors['gray-600']},
+    ${(props) => props.theme.colors['gray-900']}
+  );
 `
 
 export const SignInFormContainer = styled.form`
-  /* margin: 6rem auto; */
   max-width: 30rem;
   width: 100%;
   padding: 2.5rem 2rem;

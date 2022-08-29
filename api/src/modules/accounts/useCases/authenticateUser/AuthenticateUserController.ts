@@ -9,9 +9,8 @@ export class AuthenticateUserUseController {
 
     const authenticateUserUseCase = container.resolve(AuthenticateUserUseCase)
 
-    const token = await authenticateUserUseCase.execute({ email, password })
+    const { user, token } = await authenticateUserUseCase.execute({ email, password })
 
-    return response.status(200).json({ token })
-
+    return response.status(200).json({ user, token })
   }
 }

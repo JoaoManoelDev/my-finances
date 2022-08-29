@@ -9,13 +9,13 @@ import { AuthProvider } from './contexts/AuthContext'
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <AuthProvider>
-        <TransactionsProvider>
-          <BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
+          <TransactionsProvider>
             <Router />
-          </BrowserRouter>
-        </TransactionsProvider>
-      </AuthProvider>
+          </TransactionsProvider>
+        </AuthProvider>
+      </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>
   )

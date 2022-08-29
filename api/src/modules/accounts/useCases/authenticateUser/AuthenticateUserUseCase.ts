@@ -36,7 +36,15 @@ export class AuthenticateUserUseCase {
       expiresIn: "1d"
     })
 
-    return token
+    const dataUser = {
+      id: user.id,
+      email: user.email
+    }
+
+    return {
+      token,
+      user: dataUser
+    }
 
   }
 }

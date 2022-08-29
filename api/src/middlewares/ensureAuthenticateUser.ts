@@ -13,6 +13,8 @@ export async function ensureAuthenticateUser(
 
   const { authorization } = request.headers
 
+  console.log(authorization)
+
   if (!authorization) {
     return response.status(401).json({
       message: "Token missing."

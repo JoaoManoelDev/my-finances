@@ -40,8 +40,6 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
         q: query,
       },
     })
-
-    setTransactions(response.data)
   }
 
   async function createTransaction(data: ICreateTransactionsInput) {

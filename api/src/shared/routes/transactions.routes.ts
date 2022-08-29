@@ -12,4 +12,4 @@ const findTransactionController = new FindTransactionController()
 
 transactionsRoutes.post("/", ensureAuthenticateUser, createTransactionController.handle)
 
-transactionsRoutes.get("/:user_id", findTransactionController.handle)
+transactionsRoutes.get("/", ensureAuthenticateUser, findTransactionController.handle)
