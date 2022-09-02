@@ -38,13 +38,11 @@ export class AuthenticateUserUseCase {
 
     const dataUser = {
       id: user.id,
-      email: user.email
+      email: user.email,
+      token
     }
 
-    return {
-      token,
-      user: dataUser
-    }
+    return dataUser
 
   }
 }

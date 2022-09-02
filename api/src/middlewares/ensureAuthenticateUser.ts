@@ -23,6 +23,8 @@ export async function ensureAuthenticateUser(
 
   const token = authorization.replace("Bearer", "").trim()
 
+  console.log(token)
+
   try {
     const { sub: user_id } = verify(token, process.env.TOKEN_SECRET) as IPayload
 

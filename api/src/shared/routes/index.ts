@@ -10,4 +10,4 @@ router.use('/users', usersRoutes)
 
 router.use('/transactions', transactionsRoutes)
 
-router.use('/auth', authenticateRoutes)
+router.use('/auth/', authenticateRoutes)

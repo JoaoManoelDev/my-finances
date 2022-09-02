@@ -6,10 +6,11 @@ export class FindTransactionController {
   async handle(request: Request, response: Response) {
     const { id: user_id } = request.user
     const { _order } = request.params
+    const { q } = request.params
 
     const findTransactionUseCase = container.resolve(FindTransactionUseCase)
 
-    const allTransactions = await findTransactionUseCase.execute(user_id, _order)
+    const allTransactions = await findTransactionUseCase.execute(user_id, _order, q)
 
     return response.status(200).json(allTransactions)
   }

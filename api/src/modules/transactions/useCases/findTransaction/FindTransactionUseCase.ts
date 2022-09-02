@@ -9,9 +9,9 @@ export class FindTransactionUseCase {
     private transactionsRepository: ITransactionsRepository
   ) { }
 
-  async execute(user_id: string, _order: string) {
+  async execute(user_id: string, _order?: string, q?: string) {
 
-    const transactions = await this.transactionsRepository.findByUserId(user_id, _order)
+    const transactions = await this.transactionsRepository.findByUserId(user_id, _order, q)
 
     return transactions
 
